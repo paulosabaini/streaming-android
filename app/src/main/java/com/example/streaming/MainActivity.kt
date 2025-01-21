@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.example.streaming.player.PlayerView
 import com.example.streaming.ui.theme.StreamingTheme
 import kotlinx.serialization.Serializable
 
@@ -26,8 +27,14 @@ class MainActivity : ComponentActivity() {
                         val mediaSelection: MediaSelection = backStackEntry.toRoute()
                         MediaSelectionScreen(
                             sourceType = mediaSelection.sourceType,
-                            onNavigateToPlayer = {},
+                            onNavigateToPlayer = { navController.navigate(Player(title = it.title, url = it.url)) },
                             onNavigateToSourceSelection = { navController.navigate(SourceSelection) })
+                    }
+                    composable<Player> { backStackEntry ->
+                        val player: Player = backStackEntry.toRoute()
+                        PlayerScreen(title = player.title, url = player.url) {
+                            navController.navigateUp()
+                        }
                     }
                 }
             }
@@ -40,3 +47,6 @@ object SourceSelection
 
 @Serializable
 data class MediaSelection(val sourceType: SourceType)
+
+@Serializable
+data class Player(val title: String, val url: String)

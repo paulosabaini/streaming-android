@@ -20,16 +20,15 @@ import androidx.media3.ui.PlayerView
 @Composable
 fun PlayerView(
     modifier: Modifier = Modifier,
-    url: String?,
+    url: String,
+    title: String,
     viewModel: PlayerViewModel = viewModel()
 ) {
     val context = LocalContext.current
     val player by viewModel.playerState.collectAsStateWithLifecycle()
 
     LaunchedEffect(url) {
-        if (url != null) {
-            viewModel.initializePlayer(context, url)
-        }
+        viewModel.initializePlayer(context, url, title)
     }
 
     DisposableEffect(Unit) {
@@ -46,6 +45,7 @@ fun PlayerView(
                     this.player = player
                     setShowPreviousButton(false)
                     setShowNextButton(false)
+                    setShowBuffering(PlayerView.SHOW_BUFFERING_WHEN_PLAYING)
                 }
             },
             update = { playerView ->

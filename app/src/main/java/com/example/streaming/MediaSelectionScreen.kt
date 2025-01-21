@@ -34,7 +34,7 @@ import coil.compose.AsyncImage
 fun MediaSelectionScreen(
     modifier: Modifier = Modifier,
     sourceType: SourceType,
-    onNavigateToPlayer: (MediaItem) -> Unit,
+    onNavigateToPlayer: (MediaOption) -> Unit,
     onNavigateToSourceSelection: () -> Unit
 ) {
     Scaffold(
@@ -44,7 +44,7 @@ fun MediaSelectionScreen(
                 title = { Text(sourceType.name + " Media Selection") },
                 navigationIcon = {
                     Icon(
-                        modifier = Modifier.clickable(onClick = onNavigateToSourceSelection),
+                        modifier = Modifier.padding(8.dp).size(24.dp).clickable(onClick = onNavigateToSourceSelection),
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = null,
                     )
@@ -76,19 +76,19 @@ private fun MediaSelectionItem(
         modifier = modifier.padding(8.dp),
         onClick = onClick,
         shape = ShapeDefaults.ExtraSmall,
-        colors = CardDefaults.cardColors(containerColor = Color.Green.copy(alpha = 0.1f))
+        colors = CardDefaults.cardColors(containerColor = Color.LightGray.copy(alpha = 0.2f))
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             thumbnailUrl?.let {
                 AsyncImage(
                     modifier = Modifier.size(80.dp),
                     model = thumbnailUrl,
-                    contentDescription = null
+                    contentDescription = null,
                 )
             }
             Spacer(Modifier.width(8.dp))
@@ -108,14 +108,7 @@ private fun MediaSelectionItem(
     }
 }
 
-data class MediaItem(
-    val title: String,
-    val subtitle: String? = null,
-    val thumbnailUrl: String? = null,
-    val url: String,
-)
-
-private fun getMediaItems(sourceType: SourceType): List<MediaItem> {
+private fun getMediaItems(sourceType: SourceType): List<MediaOption> {
     return when (sourceType) {
         SourceType.VIDEO -> getMockedVideos()
         SourceType.AUDIO -> getMockedAudios()

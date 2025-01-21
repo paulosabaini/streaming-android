@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -21,6 +22,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -50,7 +52,12 @@ fun SourceSelectionScreen(
 
 @Composable
 private fun SourceItem(modifier: Modifier = Modifier, title: String, onClick: () -> Unit) {
-    Card(modifier = modifier.padding(8.dp), onClick = onClick, shape = ShapeDefaults.ExtraSmall) {
+    Card(
+        modifier = modifier.padding(8.dp),
+        onClick = onClick,
+        shape = ShapeDefaults.ExtraSmall,
+        colors = CardDefaults.cardColors(containerColor = Color.LightGray.copy(alpha = 0.2f))
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()

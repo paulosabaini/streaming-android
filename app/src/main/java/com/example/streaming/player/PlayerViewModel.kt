@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.media3.common.MediaItem
+import androidx.media3.common.MediaMetadata
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
@@ -19,11 +20,13 @@ class PlayerViewModel : ViewModel() {
 
     private var currentPosition = 0L
 
-    fun initializePlayer(context: Context, url: String) {
+    fun initializePlayer(context: Context, url: String, title: String) {
         if (_playerState.value == null) {
             viewModelScope.launch {
                 val exoPlayer = ExoPlayer.Builder(context).build().also {
-                    val mediaItem = MediaItem.fromUri(url)
+                    val mediaItem = MediaItem.Builder().setUri(url)
+                        .setMediaMetadata(MediaMetadata.Builder().setDisplayTitle(title).build())
+                        .build()
                     it.setMediaItem(mediaItem)
                     it.prepare()
                     it.playWhenReady = true
