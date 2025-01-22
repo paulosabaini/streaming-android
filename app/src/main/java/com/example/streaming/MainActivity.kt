@@ -8,9 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.example.streaming.player.PlayerView
 import com.example.streaming.ui.theme.StreamingTheme
-import kotlinx.serialization.Serializable
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,12 +39,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-@Serializable
-object SourceSelection
-
-@Serializable
-data class MediaSelection(val sourceType: SourceType)
-
-@Serializable
-data class Player(val title: String, val url: String)

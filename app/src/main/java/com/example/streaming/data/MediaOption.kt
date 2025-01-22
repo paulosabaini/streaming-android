@@ -1,4 +1,4 @@
-package com.example.streaming
+package com.example.streaming.data
 
 import kotlinx.serialization.Serializable
 

@@ -1,4 +1,4 @@
-package com.example.streaming
+package com.example.streaming.data
 
 fun getMockedVideos() = listOf(
     MediaOption(

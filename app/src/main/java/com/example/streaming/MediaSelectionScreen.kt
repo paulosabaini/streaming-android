@@ -28,6 +28,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.streaming.data.MediaOption
+import com.example.streaming.data.SourceType
+import com.example.streaming.data.getMockedAudios
+import com.example.streaming.data.getMockedLiveStreams
+import com.example.streaming.data.getMockedRadios
+import com.example.streaming.data.getMockedVideos
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
